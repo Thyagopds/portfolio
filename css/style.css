@@ -1,0 +1,292 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+
+.container_alternativo {
+    display: flex;
+    flex: 2;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+header {
+    background-color: #0073e6;
+    color: white;
+    padding: 10px;
+    height: auto;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    display: inline-block;
+    font-size: medium;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: darkblue;
+    transform: scale(1.05);
+}
+
+section {
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.projeto {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.projeto a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #0073e6;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+#sobre img.foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.icon {
+    width: 60px;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+#sobre {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#habilidades ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.texto_inicial {
+    max-width: 600px;
+    flex: 2;
+    margin-left: 15px;
+}
+
+@media (max-width: 768px) {
+    #sobre {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        padding: 15px;
+    }
+
+    #sobre img.foto {
+        width: 80%;
+        height: auto;
+        max-width: 150px;
+        max-height: 150px;
+    }
+
+    .texto_inicial {
+        max-width: 100%;
+        flex: none;
+    }
+}
+
+#contato nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px auto;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #5b5b5b;
+}
+
+.tech-link {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.tech-name {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    display: none;
+    font-size: 14px;
+}
+
+.tech-link:hover .tech-name {
+    display: block;
+}
+
+.tech-link:hover .icon {
+    display: block;
+}
+
+.projetos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.projeto-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 320px;
+    transition: transform 0.3s ease;
+}
+
+.projeto-card:hover {
+    transform: translateY(-5px);
+}
+
+.projeto-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.projeto-conteudo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.2rem;
+}
+
+.projeto-conteudo h3 {
+    margin-bottom: 0.5rem;
+    color: #222;
+}
+
+.projeto-conteudo p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.projeto-conteudo .btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    margin-top: auto;
+    transition: background-color 0.3s ease;
+}
+
+.projeto-conteudo .btn:hover {
+    background-color: #0056b3;
+}
+
+#experiencia {
+    padding: 40px 20px;
+    background-color: #f7f7f7;
+}
+
+#experiencia h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #333;
+}
+
+.experiencia-card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid #007acc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.experiencia-card h3 {
+    margin-top: 0;
+    color: #007acc;
+}
+
+.experiencia-card p {
+    margin: 5px 0;
+    line-height: 1.5;
+    color: #444;
+}
