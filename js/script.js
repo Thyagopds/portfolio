@@ -1,163 +1,148 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth Scrolling
+ 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault(); // Impede o comportamento padrão de "pular"
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
 
-            const targetId = this.getAttribute('href'); // Pega o ID (ex: "#sobre")
-            const targetElement = document.querySelector(targetId); // Encontra o elemento alvo
-
-            if (targetElement) { // Verifica se o elemento alvo existe
+            if (targetElement) {
                 targetElement.scrollIntoView({
-                    behavior: 'smooth' // Faz a rolagem suave
+                    behavior: 'smooth'
                 });
             }
         });
     });
-});
 
-// === CAROUSEL FUNCTIONALITY ===
-let currentSlide = 0;
-const slides = document.querySelectorAll('.projeto-slide');
-const indicators = document.querySelectorAll('.indicator');
-const totalSlides = slides.length;
-let autoSlideInterval;
+    const typingElement = document.getElementById('typing');
+    if (typingElement) {
+        const textos = [
+            'Desenvolvedor apaixonado por tecnologia.',
+            'Experiência com Flutter e JavaScript.',
+            'Criando interfaces modernas e responsivas.',
+            'Transformando ideias em produtos digitais.',
+            'Sempre aprendendo e inovando.'
+        ];
+        let textoIndex = 0;
+        let charIndex = 0;
+        let typingDelay = 70;
+        let erasingDelay = 40;
+        let newTextDelay = 1200;
 
-// Função para mostrar slide específico
-function showSlide(index) {
-    // Remove active de todos os slides e indicadores
-    slides.forEach(slide => slide.classList.remove('active'));
-    indicators.forEach(indicator => indicator.classList.remove('active'));
-    
-    // Adiciona active ao slide e indicador atual
-    slides[index].classList.add('active');
-    indicators[index].classList.add('active');
-    
-    // Move o carousel track
-    const track = document.querySelector('.carousel-track');
-    track.style.transform = `translateX(-${index * 25}%)`;
-    
-    currentSlide = index;
-}
-
-// Função para mudar slide (navegação manual)
-function changeSlide(direction) {
-    const newSlide = (currentSlide + direction + totalSlides) % totalSlides;
-    showSlide(newSlide);
-    resetAutoSlide();
-}
-
-// Função para ir para slide específico (indicadores)
-function goToSlide(index) {
-    showSlide(index);
-    resetAutoSlide();
-}
-
-// Auto slide function
-function nextSlide() {
-    const newSlide = (currentSlide + 1) % totalSlides;
-    showSlide(newSlide);
-}
-
-// Função para resetar o auto slide
-function resetAutoSlide() {
-    clearInterval(autoSlideInterval);
-    autoSlideInterval = null;
-    startAutoSlide();
-}
-
-// Função para iniciar auto slide
-function startAutoSlide() {
-    // Garante que não há múltiplos intervalos rodando
-    if (autoSlideInterval) {
-        clearInterval(autoSlideInterval);
-    }
-    autoSlideInterval = setInterval(nextSlide, 5000); 
-}
-
-// Event listeners para indicadores
-indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => goToSlide(index));
-});
-
-// Pausar auto slide quando mouse estiver sobre o carousel ou interagindo com ele
-const carouselContainer = document.querySelector('.carousel-container');
-const projectSlides = document.querySelectorAll('.projeto-slide');
-
-if (carouselContainer) {
-    // Pausar quando mouse entrar no container do carrossel
-    carouselContainer.addEventListener('mouseenter', () => {
-        clearInterval(autoSlideInterval);
-        autoSlideInterval = null;
-    });
-    
-    // Retomar quando mouse sair do container do carrossel
-    carouselContainer.addEventListener('mouseleave', () => {
-        // Pequeno delay para evitar conflitos
-        setTimeout(() => {
-            if (!carouselContainer.matches(':hover')) {
-                startAutoSlide();
+        function type() {
+            if (charIndex < textos[textoIndex].length) {
+                typingElement.textContent += textos[textoIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingDelay);
+            } else {
+                setTimeout(erase, newTextDelay);
             }
-        }, 100);
-    });
-}
+        }
 
-// Pausar especificamente quando mouse estiver sobre os projetos
-projectSlides.forEach(slide => {
-    slide.addEventListener('mouseenter', () => {
-        clearInterval(autoSlideInterval);
-        autoSlideInterval = null;
-    });
-    
-    slide.addEventListener('mouseleave', () => {
-        // Só retoma se não estiver mais sobre o carousel container
-        setTimeout(() => {
-            if (!carouselContainer.matches(':hover')) {
-                startAutoSlide();
+        function erase() {
+            if (charIndex > 0) {
+                typingElement.textContent = textos[textoIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingDelay);
+            } else {
+                textoIndex = (textoIndex + 1) % textos.length;
+                setTimeout(type, typingDelay + 300);
             }
-        }, 100);
-    });
-});
-
-// Iniciar auto slide quando a página carregar
-document.addEventListener('DOMContentLoaded', () => {
-    if (slides.length > 0) {
-        showSlide(0); // Mostrar primeiro slide
-        startAutoSlide(); // Iniciar auto slide
+        }
+        setTimeout(type, 800);
     }
-});
 
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-        changeSlide(-1);
-    } else if (e.key === 'ArrowRight') {
-        changeSlide(1);
-    }
-});
+    const carouselContainer = document.querySelector('.carousel-projetos');
+    if (carouselContainer) {
+        let currentProjetos = 0;
+        const slidesProjetos = document.querySelectorAll('.carousel-slide');
+        const indicatorsProjetos = document.querySelectorAll('.carousel-indicator');
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
+        const totalProjetos = slidesProjetos.length;
+        let intervalProjetos;
 
-// Touch support para mobile
-let startX = 0;
-let endX = 0;
+        if (slidesProjetos.length > 0 && indicatorsProjetos.length > 0 && prevBtn && nextBtn) {
 
-carouselContainer?.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-});
+            function showSlideProjetos(n) {
+                currentProjetos = (n + totalProjetos) % totalProjetos;
+                
+                slidesProjetos.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === currentProjetos);
+                });
+                indicatorsProjetos.forEach((ind, i) => {
+                    ind.classList.toggle('active', i === currentProjetos);
+                });
+            }
 
-carouselContainer?.addEventListener('touchend', (e) => {
-    endX = e.changedTouches[0].clientX;
-    handleSwipe();
-});
+            function nextProjetos() {
+                showSlideProjetos(currentProjetos + 1);
+            }
 
-function handleSwipe() {
-    const threshold = 50; // Minimum swipe distance
-    const diff = startX - endX;
-    
-    if (Math.abs(diff) > threshold) {
-        if (diff > 0) {
-            changeSlide(1); // Swipe left - next slide
-        } else {
-            changeSlide(-1); // Swipe right - previous slide
+            function startAutoProjetos() {
+                clearInterval(intervalProjetos); 
+                intervalProjetos = setInterval(nextProjetos, 5000);
+            }
+
+            function resetAutoProjetos() {
+                startAutoProjetos();
+            }
+
+            prevBtn.addEventListener('click', () => {
+                showSlideProjetos(currentProjetos - 1);
+                resetAutoProjetos();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                showSlideProjetos(currentProjetos + 1);
+                resetAutoProjetos();
+            });
+
+            indicatorsProjetos.forEach((ind, i) => {
+                ind.addEventListener('click', () => {
+                    showSlideProjetos(i);
+                    resetAutoProjetos();
+                });
+            });
+
+            carouselContainer.addEventListener('mouseenter', () => clearInterval(intervalProjetos));
+            carouselContainer.addEventListener('mouseleave', () => startAutoProjetos());
+
+            document.addEventListener('keydown', (e) => {
+                const rect = carouselContainer.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+
+                if (isVisible) {
+                    if (e.key === 'ArrowLeft') {
+                        showSlideProjetos(currentProjetos - 1);
+                        resetAutoProjetos();
+                    } else if (e.key === 'ArrowRight') {
+                        showSlideProjetos(currentProjetos + 1);
+                        resetAutoProjetos();
+                    }
+                }
+            });
+
+            let startX = 0;
+            carouselContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            carouselContainer.addEventListener('touchend', (e) => {
+                let endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        showSlideProjetos(currentProjetos + 1);
+                    } else {
+                        showSlideProjetos(currentProjetos - 1);
+                    }
+                    resetAutoProjetos();
+                }
+            });
+            
+            showSlideProjetos(0);
+            startAutoProjetos();
         }
     }
-}
+});
