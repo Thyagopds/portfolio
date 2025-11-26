@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typingElement) {
         const textos = [
             'Desenvolvedor apaixonado por tecnologia.',
-            'Experiência com Flutter e JavaScript.',
             'Criando interfaces modernas e responsivas.',
             'Transformando ideias em produtos digitais.',
             'Sempre aprendendo e inovando.'
