@@ -1,4 +1,3 @@
-/* Estilos Gerais */
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
@@ -7,7 +6,6 @@ body {
     color: #e0e7ef;
 }
 
-/* Seção Hero (Inicial) */
 .hero-section {
     min-height: 100vh;
     display: flex;
@@ -86,7 +84,6 @@ body {
     color: #fff;
 }
 
-/* Seção Habilidades */
 .skills-section {
     max-width: 900px;
     margin: 60px auto 40px auto;
@@ -95,6 +92,13 @@ body {
     box-shadow: 0 8px 32px #0f2027cc;
     padding: 32px 24px;
     text-align: center;
+}
+
+.skills-section h2 {
+    font-size: 2em;
+    margin-bottom: 60px;
+    color: #fff;
+    text-shadow: 0 0 10px #00c3ff;
 }
 
 .skills-list {
@@ -131,30 +135,25 @@ body {
     font-weight: 500;
 }
 
-/* Seção Projetos (Carrossel) */
 .projects-section {
-    /* --- ESTILOS RESTAURADOS --- */
-    max-width: 900px; /* Largura máxima para o "card" da seção */
-    margin: 60px auto 40px auto; /* Centraliza o card na página */
-    background: rgba(44, 83, 100, 0.85); /* A cor de fundo que você gostou */
-    border-radius: 18px; /* Bordas arredondadas do card */
-    box-shadow: 0 8px 32px #0f2027cc; /* A sombra para dar profundidade */
-    padding: 32px 24px; /* Espaçamento interno */
-    /* --- FIM DOS ESTILOS RESTAURADOS --- */
-    
+    max-width: 900px;
+    margin: 60px auto 40px auto;
+    background: rgba(44, 83, 100, 0.85);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px #0f2027cc;
+    padding: 32px 24px;
     text-align: center;
 }
 
 .projects-section h2 {
-    font-size: 2.2rem;
+    font-size: 2em;
     color: #fff;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
+    text-shadow: 0 0 10px #00c3ff;
 }
 
-/* O resto do CSS do carrossel (.carousel-projetos, .project-card, etc.) pode continuar o mesmo */
 .carousel-projetos {
     position: relative;
-    /* O max-width aqui agora é relativo ao container da seção, então 100% funciona bem */
     max-width: 100%; 
     margin: 0 auto;
     overflow: hidden;
@@ -169,7 +168,7 @@ body {
 
 .carousel-slide.active {
     display: flex;
-    justify-content: center; /* Centraliza o card no slide */
+    justify-content: center; 
     opacity: 1;
 }
 
@@ -180,13 +179,13 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    width: 100%; /* LARGURA FLEXÍVEL */
+    width: 100%; 
     max-width: 700px;
 }
 
 .project-card img {
     width: 100%;
-    height: auto; /* ALTURA AUTOMÁTICA */
+    height: auto;
     max-height: 350px;
     object-fit: scale-down;
     object-position: top;
@@ -223,7 +222,7 @@ body {
     margin-top: 16px;
 }
 
-.btn { /* Estilo base para botões, ajuste conforme necessário */
+.btn {
     padding: 10px 20px;
     border-radius: 8px;
     text-decoration: none;
@@ -255,7 +254,6 @@ body {
     border-color: #4a5568;
 }
 
-/* Controles e Indicadores do Carrossel */
 .carousel-controls {
     display: flex;
     justify-content: center;
@@ -306,15 +304,22 @@ body {
     opacity: 1;
 }
 
-/* Seção Contato */
 .contact-section {
     max-width: 600px;
-    margin: 60px auto 40px auto;
+    margin: 40px auto 40px auto;
     background: rgba(44, 83, 100, 0.85);
     border-radius: 18px;
     box-shadow: 0 8px 32px #0f2027cc;
-    padding: 32px 24px;
+    padding: 24px;
     text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    margin-top: 12px;
+    color: #fff;
+    text-shadow: 0 0 10px #00c3ff;
 }
 
 .contact-icons {
@@ -327,7 +332,7 @@ body {
 .contact-icons img {
     width: 48px;
     height: 48px;
-    border-radius: 12px;
+    border-radius: 24px;
     box-shadow: 0 2px 12px #00c3ff44;
     transition: transform 0.3s;
 }
@@ -336,7 +341,6 @@ body {
     transform: scale(1.12);
 }
 
-/* Media Queries (Responsividade) */
 @media (max-width: 700px) {
     .hero-title { font-size: 2.2em; }
     .hero-subtitle { font-size: 1.2em; }
@@ -350,6 +354,163 @@ body {
     }
 }
 
+.experience-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.experience-section h2 {
+    font-size: 2em;
+    margin-bottom: 60px;
+    color: #fff;
+    text-shadow: 0 0 10px #00c3ff;
+}
+
+.experience-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.experience-card {
+    background: linear-gradient(135deg, rgba(0, 195, 255, 0.1), rgba(255, 106, 0, 0.1));
+    border: 2px solid rgba(0, 195, 255, 0.3);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: left;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.experience-card:hover {
+    border-color: #00c3ff;
+    box-shadow: 0 10px 25px rgba(0, 195, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.job-title {
+    font-size: 1.4em;
+    color: #00c3ff;
+    margin: 0;
+}
+
+.company {
+    background: rgba(0, 195, 255, 0.2);
+    color: #00c3ff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.period {
+    color: #ff6a00;
+    font-size: 0.95em;
+    margin: 10px 0 20px 0;
+    font-weight: 500;
+}
+
+.job-description {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.job-description li {
+    color: #e0e7ef;
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.job-description li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #00c3ff;
+    font-weight: bold;
+}
+
+.education-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.education-section h2 {
+    font-size: 2em;
+    margin-bottom: 60px;
+    color: #fff;
+    text-shadow: 0 0 10px #00c3ff;
+}
+
+.education-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.education-card {
+    background: linear-gradient(135deg, rgba(0, 195, 255, 0.1), rgba(255, 106, 0, 0.1));
+    border: 2px solid rgba(0, 195, 255, 0.3);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: left;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.education-card:hover {
+    border-color: #00c3ff;
+    box-shadow: 0 10px 25px rgba(0, 195, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.course-title {
+    font-size: 1.4em;
+    color: #00c3ff;
+    margin: 0;
+}
+
+.institution {
+    background: rgba(0, 195, 255, 0.2);
+    color: #00c3ff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.education-card .status {
+    color: #ff6a00;
+    font-size: 0.95em;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.education-card .description {
+    color: #e0e7ef;
+    line-height: 1.6;
+    margin: 0;
+}
+
 @media (max-width: 600px) {
     .skills-list {
         gap: 18px;
@@ -357,5 +518,21 @@ body {
     .hero-nav {
         flex-direction: column;
         gap: 15px;
+    }
+    .experience-container {
+        grid-template-columns: 1fr;
+    }
+    .experience-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .education-container {
+        grid-template-columns: 1fr;
+    }
+    .education-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 }

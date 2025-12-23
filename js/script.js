@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typingElement) {
         const textos = [
             'Desenvolvedor apaixonado por tecnologia.',
-            'Experiência com Flutter e JavaScript.',
+            'Experiência com React Native, Flutter e JavaScript.',
             'Criando interfaces modernas e responsivas.',
             'Transformando ideias em produtos digitais.',
             'Sempre aprendendo e inovando.'
@@ -28,28 +28,35 @@ document.addEventListener('DOMContentLoaded', function() {
         let typingDelay = 70;
         let erasingDelay = 40;
         let newTextDelay = 1200;
+        let timeoutId = null;
 
         function type() {
+            if (timeoutId) clearTimeout(timeoutId);
+            
             if (charIndex < textos[textoIndex].length) {
-                typingElement.textContent += textos[textoIndex].charAt(charIndex);
+                typingElement.textContent = textos[textoIndex].substring(0, charIndex + 1);
                 charIndex++;
-                setTimeout(type, typingDelay);
+                timeoutId = setTimeout(type, typingDelay);
             } else {
-                setTimeout(erase, newTextDelay);
+                timeoutId = setTimeout(erase, newTextDelay);
             }
         }
 
         function erase() {
+            if (timeoutId) clearTimeout(timeoutId);
+            
             if (charIndex > 0) {
-                typingElement.textContent = textos[textoIndex].substring(0, charIndex - 1);
                 charIndex--;
-                setTimeout(erase, erasingDelay);
+                typingElement.textContent = textos[textoIndex].substring(0, charIndex);
+                timeoutId = setTimeout(erase, erasingDelay);
             } else {
                 textoIndex = (textoIndex + 1) % textos.length;
-                setTimeout(type, typingDelay + 300);
+                timeoutId = setTimeout(type, typingDelay + 300);
             }
         }
-        setTimeout(type, 800);
+        
+        typingElement.textContent = '';
+        timeoutId = setTimeout(type, 800);
     }
 
     const carouselContainer = document.querySelector('.carousel-projetos');
@@ -81,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             function startAutoProjetos() {
                 clearInterval(intervalProjetos); 
-                intervalProjetos = setInterval(nextProjetos, 5000);
+                intervalProjetos = setInterval(nextProjetos, 8000);
             }
 
             function resetAutoProjetos() {
@@ -105,8 +112,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
 
-            carouselContainer.addEventListener('mouseenter', () => clearInterval(intervalProjetos));
-            carouselContainer.addEventListener('mouseleave', () => startAutoProjetos());
+            const projectsSection = document.querySelector('.projects-section');
+            if (projectsSection) {
+                projectsSection.addEventListener('mouseenter', () => {
+                    clearInterval(intervalProjetos);
+                });
+                projectsSection.addEventListener('mouseleave', () => {
+                    startAutoProjetos();
+                });
+            }
 
             document.addEventListener('keydown', (e) => {
                 const rect = carouselContainer.getBoundingClientRect();
